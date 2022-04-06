@@ -1,0 +1,49 @@
+const Physics2d = {
+    /**
+     * @description
+     * Calculate the axis specific initial velocities of a projectile
+     * 
+     * @param {Number} velocity Initial velocity of a projectile
+     * @param {Number} angle 
+     * 
+     * @example
+     * https://www.youtube.com/watch?v=dlf-xBkAv9w&list=PL3Fs-J5jNT53BS-Ct4X6Kzl0-vPSOY47x&index=16
+     */
+    calculateInitialVectorVelocity(velocity, angle) {
+        const toRadians = Math.PI / 180;
+
+        const V0x = velocity * Math.cos(toRadians * angle);
+        const V0y = velocity * Math.sin(toRadians * angle);
+
+        return {
+            x: V0x,
+            y: V0y
+        };
+    },
+    /**
+     * @description
+     * Calculate the Y-axis position of a projectile along its trajectory
+     * 
+     * @param {Number} velocity Y-axis specific velocity
+     * @param {Number} gravity 
+     * @param {Number} time
+     */
+    calculateVerticalDisplacement(velocity, gravity, time) {
+        gravity = gravity > 0 ? gravity * -1 : gravity;
+
+        const gravityFreePath = (velocity * time);
+        const effectOfGravity = 0.5 * gravity * Math.pow(time, 2);
+
+        return gravityFreePath + effectOfGravity;
+    },
+    /**
+     * @description
+     * Calculate the X-axis position of a projectile along its trajectory
+     * 
+     * @param {Number} velocity X-axis specific velocity
+     * @param {Number} time
+     */
+    calculateHorizontalDisplacement(velocity, time) {
+        return velocity * time;
+    }
+};
